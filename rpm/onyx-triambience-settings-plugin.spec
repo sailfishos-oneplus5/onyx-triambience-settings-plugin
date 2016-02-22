@@ -46,6 +46,6 @@ rm -rf %{buildroot}
 %files
 %defattr(-,root,root,-)
 %{_libdir}/libonyxtriambiencesettings-qt5.*
-%{_libdir}/qt5/qml/com/kimmoli/settings/onyx-triambience
+%{_libdir}/qt5/qml/com/kimmoli/onyxtriambiencesettings/
 /usr/share/jolla-settings/entries/
 /usr/share/jolla-settings/pages/onyx-triambience-settings/

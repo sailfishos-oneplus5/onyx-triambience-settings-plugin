@@ -22,6 +22,8 @@ public:
     void registerTypes(const char *uri)
     {
         Q_ASSERT(uri == QLatin1String("com.kimmoli.onyxtriambiencesettings"));
+
+        qmlRegisterType<SettingsUi>(uri, 1, 0, "TriambienceSettings");
     }
 };
 

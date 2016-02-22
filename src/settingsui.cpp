@@ -15,6 +15,11 @@ SettingsUi::SettingsUi(QObject *parent) :
 {
 }
 
+QString SettingsUi::getStuff()
+{
+    return QString("some stuff");
+}
+
 SettingsUi::~SettingsUi()
 {
 }

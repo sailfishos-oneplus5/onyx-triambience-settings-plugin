@@ -1,5 +1,5 @@
 TARGET = onyxtriambiencesettings
-PLUGIN_IMPORT_PATH = com/kimmoli/settings/onyx-triambience
+PLUGIN_IMPORT_PATH = com/kimmoli/onyxtriambiencesettings
 QT += dbus
 QT -= gui
 

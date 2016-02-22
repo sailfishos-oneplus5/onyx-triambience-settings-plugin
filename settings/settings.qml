@@ -7,6 +7,11 @@ Page
 {
     id: page
 
+    TriambienceSettings
+    {
+        Component.onCompleted: console.log(getStuff())
+    }
+
     SilicaFlickable
     {
         id: flick

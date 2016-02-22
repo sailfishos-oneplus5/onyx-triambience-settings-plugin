@@ -12,4 +12,4 @@ HEADERS += \
 
 target.path = $$[QT_INSTALL_LIBS]
 
-INSTALLS += target #headers pkgconfig
+INSTALLS += target

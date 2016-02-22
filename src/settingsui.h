@@ -12,6 +12,8 @@ class Q_DECL_EXPORT SettingsUi : public QObject
 public:
     explicit SettingsUi(QObject *parent = 0);
     virtual ~SettingsUi();
+
+    Q_INVOKABLE QString getStuff();
 };
 
 
