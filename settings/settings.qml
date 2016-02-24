@@ -22,12 +22,21 @@ Page
                 ambiences.append({ name: a[i]["name"],
                                    displayName: a[i]["displayName"],
                                    wallpaper: a[i]["wallpaper"] })
+            }
 
-                if (a[i]["name"] === ambience_top.value)
+            for (var i=0 ; i < ambiences.count ; i++)
+            {
+                var n = ambiences.get(i).name
+
+                combo_top._updating = false
+                combo_middle._updating = false
+                combo_bottom._updating = false
+
+                if (n === ambience_top.value)
                     combo_top.currentIndex = i
-                if (a[i]["name"] === ambience_middle.value)
+                else if (n === ambience_middle.value)
                     combo_middle.currentIndex = i
-                if (a[i]["name"] === ambience_bottom.value)
+                else if (n === ambience_bottom.value)
                     combo_bottom.currentIndex = i
             }
         }
