@@ -77,6 +77,13 @@ Page
                     }
                 }
             }
+            Image
+            {
+                source: ambiences.get(combo_top.currentIndex).wallpaper
+                width: parent.width
+                height: Theme.itemSizeExtraLarge
+                fillMode: Image.PreserveAspectCrop
+            }
             ComboBox
             {
                 id: combo_middle
@@ -93,6 +100,13 @@ Page
                         }
                     }
                 }
+            }
+            Image
+            {
+                source: ambiences.get(combo_middle.currentIndex).wallpaper
+                width: parent.width
+                height: Theme.itemSizeExtraLarge
+                fillMode: Image.PreserveAspectCrop
             }
             ComboBox
             {
@@ -111,7 +125,13 @@ Page
                     }
                 }
             }
-
+            Image
+            {
+                source: ambiences.get(combo_bottom.currentIndex).wallpaper
+                width: parent.width
+                height: Theme.itemSizeExtraLarge
+                fillMode: Image.PreserveAspectCrop
+            }
         }
     }    
 
