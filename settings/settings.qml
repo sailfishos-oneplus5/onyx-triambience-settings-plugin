@@ -19,7 +19,16 @@ Page
             var a = getAmbiences()
             for (var i=0 ; i < a.length ; i++)
             {
-                ambiences.append({ displayName: a[i]["displayName"], wallpaper: a[i]["wallpaper"]})
+                ambiences.append({ name: a[i]["name"],
+                                   displayName: a[i]["displayName"],
+                                   wallpaper: a[i]["wallpaper"] })
+
+                if (a[i]["name"] === ambience_top.value)
+                    combo_top.currentIndex = i
+                if (a[i]["name"] === ambience_middle.value)
+                    combo_middle.currentIndex = i
+                if (a[i]["name"] === ambience_bottom.value)
+                    combo_bottom.currentIndex = i
             }
         }
     }
@@ -42,30 +51,58 @@ Page
                 title: "Tristate ambience selector"
             }
 
-            SectionHeader
+            ComboBox
             {
-                text: "top"
+                id: combo_top
+                label: "Top "
+                menu: ContextMenu
+                {
+                    Repeater
+                    {
+                        model: ambiences
+                        delegate: MenuItem
+                        {
+                            text: displayName
+                            onClicked: ambience_top.value = name
+                        }
+                    }
+                }
             }
-            Label
+            ComboBox
             {
-                text: ambience_top.value
+                id: combo_middle
+                label: "Middle "
+                menu: ContextMenu
+                {
+                    Repeater
+                    {
+                        model: ambiences
+                        delegate: MenuItem
+                        {
+                            text: displayName
+                            onClicked: ambience_middle.value = name
+                        }
+                    }
+                }
             }
-            SectionHeader
+            ComboBox
             {
-                text: "middle"
+                id: combo_bottom
+                label: "Bottom "
+                menu: ContextMenu
+                {
+                    Repeater
+                    {
+                        model: ambiences
+                        delegate: MenuItem
+                        {
+                            text: displayName
+                            onClicked: ambience_bottom.value = name
+                        }
+                    }
+                }
             }
-            Label
-            {
-                text: ambience_middle.value
-            }
-            SectionHeader
-            {
-                text: "bottom"
-            }
-            Label
-            {
-                text: ambience_bottom.value
-            }
+
         }
     }    
 

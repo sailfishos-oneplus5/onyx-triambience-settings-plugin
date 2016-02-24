@@ -7,6 +7,7 @@
 #include <QDebug>
 #include <QtDBus/QtDBus>
 #include <QtAlgorithms>
+#include <QFileInfo>
 #include <linux/input.h>
 
 
@@ -52,9 +53,12 @@ QVariantList SettingsUi::getAmbiences()
         QJsonDocument ambJson = QJsonDocument::fromJson(ambString.toUtf8());
         QJsonObject ambObject = ambJson.object();
 
+        QFileInfo fi(amb);
+
         map.clear();
+        map.insert("name", fi.baseName());
         map.insert("displayName", ambObject["displayName"].toString());
-        map.insert("wallpaper", ambObject["wallpaper"].toString());
+        map.insert("wallpaper", fi.absolutePath() + "/images/" + ambObject["wallpaper"].toString());
         tmp.append(map);
 
         qDebug() << map;
