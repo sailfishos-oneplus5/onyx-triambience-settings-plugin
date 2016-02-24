@@ -7,9 +7,21 @@ Page
 {
     id: page
 
+    ListModel
+    {
+        id: ambiences
+    }
+
     TriambienceSettings
     {
-        Component.onCompleted: console.log(getStuff())
+        Component.onCompleted:
+        {
+            var a = getAmbiences()
+            for (var i=0 ; i < a.length ; i++)
+            {
+                ambiences.append({ displayName: a[i]["displayName"], wallpaper: a[i]["wallpaper"]})
+            }
+        }
     }
 
     SilicaFlickable
