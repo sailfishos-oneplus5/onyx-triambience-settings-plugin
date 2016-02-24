@@ -55,9 +55,22 @@ QVariantList SettingsUi::getAmbiences()
 
         QFileInfo fi(amb);
 
+        QString displayName = ambObject["displayName"].toString();
+
+        QTranslator translator;
+        if (translator.load( QLocale(), ambObject["translationCatalog"].toString(), "-", "/usr/share/translations" ) )
+        {
+            displayName = translator.translate("", ambObject["displayName"].toString().toLocal8Bit().constData());
+            qDebug() << "translating..." << ambObject["displayName"].toString() << "to" << displayName;
+        }
+        else
+        {
+            qDebug() << "translation not loaded" << ambObject["translationCatalog"].toString();
+        }
+
         map.clear();
         map.insert("name", fi.baseName());
-        map.insert("displayName", ambObject["displayName"].toString());
+        map.insert("displayName", displayName);
         map.insert("wallpaper", fi.absolutePath() + "/images/" + ambObject["wallpaper"].toString());
         tmp.append(map);
 
