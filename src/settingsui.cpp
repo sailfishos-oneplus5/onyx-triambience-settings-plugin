@@ -66,6 +66,7 @@ QVariantList SettingsUi::getAmbiences()
         map.insert("name", fi.baseName());
         map.insert("displayName", displayName);
         map.insert("wallpaper", fi.absolutePath() + "/images/" + ambObject["wallpaper"].toString());
+        map.insert("highlightColor", ambObject["highlightColor"].toString());
         tmp.append(map);
 
         amb.close();

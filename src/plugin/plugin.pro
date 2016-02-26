@@ -5,7 +5,7 @@ QT -= gui
 
 TEMPLATE = lib
 CONFIG += qt plugin hide_symbols
-QT += qml
+QT += qml quick
 
 INCLUDEPATH += ..
 LIBS += -L.. -lonyxtriambiencesettings-qt5
