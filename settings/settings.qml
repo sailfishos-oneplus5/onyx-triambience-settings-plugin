@@ -58,6 +58,12 @@ Page
                 title: qsTrId("onyx-tristate-settings-title")
             }
 
+            SectionHeader
+            {
+                //% "Top"
+                text: qsTrId("onyx-top-position")
+            }
+
             AmbienceImage
             {
                 source: "image://wallpapers" + ambiences.getByName(ambience_top.value).wallpaper + "?" + width + "?" + height
@@ -67,23 +73,18 @@ Page
                 {
                     var sel = pageStack.push(Qt.resolvedUrl("Selector.qml"), { ambiences: ambiences,
                                                                                name: ambience_top.value,
-                                                                               //% "Top"
                                                                                pageTitle: qsTrId("onyx-top-position")})
                     sel.selected.connect(function()
                     {
                         ambience_top.value = sel.name
                     })
                 }
-                Label
-                {
-                    text: qsTrId("onyx-top-position")
-                    font.pixelSize: Theme.fontSizeLarge
-                    color: ambiences.getByName(ambience_top.value).highlightColor
-                    anchors.left: parent.left
-                    anchors.top: parent.top
-                    anchors.leftMargin: Theme.paddingLarge
-                    anchors.topMargin: Theme.paddingMedium
-                }
+            }
+
+            SectionHeader
+            {
+                //% "Middle"
+                text: qsTrId("onyx-middle-position")
             }
 
             AmbienceImage
@@ -95,23 +96,18 @@ Page
                 {
                     var sel = pageStack.push(Qt.resolvedUrl("Selector.qml"), { ambiences: ambiences,
                                                                                name: ambience_middle.value,
-                                                                               //% "Middle"
                                                                                pageTitle: qsTrId("onyx-middle-position")})
                     sel.selected.connect(function()
                     {
                         ambience_middle.value = sel.name
                     })
                 }
-                Label
-                {
-                    text: qsTrId("onyx-middle-position")
-                    font.pixelSize: Theme.fontSizeLarge
-                    color: ambiences.getByName(ambience_middle.value).highlightColor
-                    anchors.left: parent.left
-                    anchors.top: parent.top
-                    anchors.leftMargin: Theme.paddingLarge
-                    anchors.topMargin: Theme.paddingMedium
-                }
+            }
+
+            SectionHeader
+            {
+                //% "Bottom"
+                text: qsTrId("onyx-bottom-position")
             }
 
             AmbienceImage
@@ -123,22 +119,11 @@ Page
                 {
                     var sel = pageStack.push(Qt.resolvedUrl("Selector.qml"), { ambiences: ambiences,
                                                                                name: ambience_bottom.value,
-                                                                               //% "Bottom"
                                                                                pageTitle: qsTrId("onyx-bottom-position")})
                     sel.selected.connect(function()
                     {
                         ambience_bottom.value = sel.name
                     })
-                }
-                Label
-                {
-                    text: qsTrId("onyx-bottom-position")
-                    font.pixelSize: Theme.fontSizeLarge
-                    color: ambiences.getByName(ambience_bottom.value).highlightColor
-                    anchors.left: parent.left
-                    anchors.top: parent.top
-                    anchors.leftMargin: Theme.paddingLarge
-                    anchors.topMargin: Theme.paddingMedium
                 }
             }
         }
