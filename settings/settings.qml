@@ -56,22 +56,21 @@ Page
                 title: "Tristate ambience selector"
             }
 
-            Image
+            AmbienceImage
             {
                 source: "image://wallpapers" + ambiences.getByName(ambience_top.value).wallpaper + "?" + width + "?" + height
-                width: flick.width ? Math.min(flick.width, screen.sizeCategory > Screen.Medium ? Screen.width*0.7 : Screen.width) : Screen.width
-                height: Theme.itemSizeHuge
-                fillMode: Image.PreserveAspectCrop
-                asynchronous: true
-
-                BusyIndicator
+                ambienceName: ambiences.getByName(ambience_top.value).displayName
+                ambienceColor: ambiences.getByName(ambience_top.value).highlightColor
+                onClicked:
                 {
-                    size: BusyIndicatorSize.Medium
-                    anchors.centerIn: parent
-                    running: parent.status != Image.Ready
-                    visible: running
+                    var sel = pageStack.push(Qt.resolvedUrl("Selector.qml"), { ambiences: ambiences,
+                                                                               name: ambience_top.value,
+                                                                               pageTitle: "Top"})
+                    sel.selected.connect(function()
+                    {
+                        ambience_top.value = sel.name
+                    })
                 }
-
                 Label
                 {
                     text: "Top"
@@ -79,49 +78,26 @@ Page
                     color: ambiences.getByName(ambience_top.value).highlightColor
                     anchors.left: parent.left
                     anchors.top: parent.top
-                    anchors.margins: Theme.paddingMedium
-                }
-                Label
-                {
-                    text: ambiences.getByName(ambience_top.value).displayName
-                    font.pixelSize: Theme.fontSizeLarge
-                    color: ambiences.getByName(ambience_top.value).highlightColor
-                    anchors.left: parent.left
-                    anchors.bottom: parent.bottom
-                    anchors.margins: Theme.paddingMedium
-                }
-                BackgroundItem
-                {
-                    anchors.fill: parent
-                    onClicked:
-                    {
-                        var sel = pageStack.push(Qt.resolvedUrl("Selector.qml"), { ambiences: ambiences,
-                                                                                   name: ambience_top.value,
-                                                                                   pageTitle: "Top"})
-                        sel.selected.connect(function()
-                        {
-                            ambience_top.value = sel.name
-                        })
-                    }
+                    anchors.leftMargin: Theme.paddingLarge
+                    anchors.topMargin: Theme.paddingMedium
                 }
             }
 
-            Image
+            AmbienceImage
             {
                 source: "image://wallpapers" + ambiences.getByName(ambience_middle.value).wallpaper + "?" + width + "?" + height
-                width: flick.width ? Math.min(flick.width, screen.sizeCategory > Screen.Medium ? Screen.width*0.7 : Screen.width) : Screen.width
-                height: Theme.itemSizeHuge
-                fillMode: Image.PreserveAspectCrop
-                asynchronous: true
-
-                BusyIndicator
+                ambienceName: ambiences.getByName(ambience_middle.value).displayName
+                ambienceColor: ambiences.getByName(ambience_middle.value).highlightColor
+                onClicked:
                 {
-                    size: BusyIndicatorSize.Medium
-                    anchors.centerIn: parent
-                    running: parent.status != Image.Ready
-                    visible: running
+                    var sel = pageStack.push(Qt.resolvedUrl("Selector.qml"), { ambiences: ambiences,
+                                                                               name: ambience_middle.value,
+                                                                               pageTitle: "Middle"})
+                    sel.selected.connect(function()
+                    {
+                        ambience_middle.value = sel.name
+                    })
                 }
-
                 Label
                 {
                     text: "Middle"
@@ -129,49 +105,26 @@ Page
                     color: ambiences.getByName(ambience_middle.value).highlightColor
                     anchors.left: parent.left
                     anchors.top: parent.top
-                    anchors.margins: Theme.paddingMedium
-                }
-                Label
-                {
-                    text: ambiences.getByName(ambience_middle.value).displayName
-                    font.pixelSize: Theme.fontSizeLarge
-                    color: ambiences.getByName(ambience_middle.value).highlightColor
-                    anchors.left: parent.left
-                    anchors.bottom: parent.bottom
-                    anchors.margins: Theme.paddingMedium
-                }
-                BackgroundItem
-                {
-                    anchors.fill: parent
-                    onClicked:
-                    {
-                        var sel = pageStack.push(Qt.resolvedUrl("Selector.qml"), { ambiences: ambiences,
-                                                                                   name: ambience_middle.value,
-                                                                                   pageTitle: "Middle"})
-                        sel.selected.connect(function()
-                        {
-                            ambience_middle.value = sel.name
-                        })
-                    }
+                    anchors.leftMargin: Theme.paddingLarge
+                    anchors.topMargin: Theme.paddingMedium
                 }
             }
 
-            Image
+            AmbienceImage
             {
                 source: "image://wallpapers" + ambiences.getByName(ambience_bottom.value).wallpaper + "?" + width + "?" + height
-                width: flick.width ? Math.min(flick.width, screen.sizeCategory > Screen.Medium ? Screen.width*0.7 : Screen.width) : Screen.width
-                height: Theme.itemSizeHuge
-                fillMode: Image.PreserveAspectCrop
-                asynchronous: true
-
-                BusyIndicator
+                ambienceName: ambiences.getByName(ambience_bottom.value).displayName
+                ambienceColor: ambiences.getByName(ambience_bottom.value).highlightColor
+                onClicked:
                 {
-                    size: BusyIndicatorSize.Medium
-                    anchors.centerIn: parent
-                    running: parent.status != Image.Ready
-                    visible: running
+                    var sel = pageStack.push(Qt.resolvedUrl("Selector.qml"), { ambiences: ambiences,
+                                                                               name: ambience_bottom.value,
+                                                                               pageTitle: "Bottom"})
+                    sel.selected.connect(function()
+                    {
+                        ambience_bottom.value = sel.name
+                    })
                 }
-
                 Label
                 {
                     text: "Bottom"
@@ -179,30 +132,8 @@ Page
                     color: ambiences.getByName(ambience_bottom.value).highlightColor
                     anchors.left: parent.left
                     anchors.top: parent.top
-                    anchors.margins: Theme.paddingMedium
-                }
-                Label
-                {
-                    text: ambiences.getByName(ambience_bottom.value).displayName
-                    font.pixelSize: Theme.fontSizeLarge
-                    color: ambiences.getByName(ambience_bottom.value).highlightColor
-                    anchors.left: parent.left
-                    anchors.bottom: parent.bottom
-                    anchors.margins: Theme.paddingMedium
-                }
-                BackgroundItem
-                {
-                    anchors.fill: parent
-                    onClicked:
-                    {
-                        var sel = pageStack.push(Qt.resolvedUrl("Selector.qml"), { ambiences: ambiences,
-                                                                                   name: ambience_bottom.value,
-                                                                                   pageTitle: "Bottom"})
-                        sel.selected.connect(function()
-                        {
-                            ambience_bottom.value = sel.name
-                        })
-                    }
+                    anchors.leftMargin: Theme.paddingLarge
+                    anchors.topMargin: Theme.paddingMedium
                 }
             }
         }

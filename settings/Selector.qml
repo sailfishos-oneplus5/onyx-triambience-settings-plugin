@@ -32,57 +32,20 @@ Page
             Repeater
             {
                 model: ambiences
-                delegate:
-                    Image
+                delegate: AmbienceImage
+                {
+                    source: "image://wallpapers" + wallpaper + "?" + width + "?" + height
+                    ambienceName: displayName
+                    ambienceColor: highlightColor
+                    isSelected: name === page.name
+                    onClicked:
                     {
-                        source: "image://wallpapers" + wallpaper + "?" + width + "?" + height
-                        width: flick.width ? Math.min(flick.width, screen.sizeCategory > Screen.Medium ? Screen.width*0.7 : Screen.width) : Screen.width
-                        height: Theme.itemSizeHuge
-                        fillMode: Image.PreserveAspectCrop
-                        asynchronous: true
-
-                        BusyIndicator
-                        {
-                            size: BusyIndicatorSize.Medium
-                            anchors.centerIn: parent
-                            running: parent.status != Image.Ready
-                            visible: running
-                        }
-
-                        Label
-                        {
-                            id: namelabel
-                            text: displayName
-                            font.pixelSize: Theme.fontSizeLarge
-                            color: highlightColor
-                            anchors.left: parent.left
-                            anchors.bottom: parent.bottom
-                            anchors.leftMargin: Theme.paddingLarge
-                            anchors.bottomMargin: Theme.paddingMedium
-                        }
-                        GlassItem
-                        {
-                            opacity: (name === page.name) ? 1.0 : 0.0
-                            color: Theme.primaryColor
-                            anchors.left: parent.left
-                            anchors.leftMargin: -width/2
-                            anchors.verticalCenter: namelabel.verticalCenter
-                            dimmed: false
-                            falloffRadius: defaultFalloffRadius
-                            brightness: 1.0
-                        }
-
-                        BackgroundItem
-                        {
-                            anchors.fill: parent
-                            onClicked:
-                            {
-                                page.name = ambiences.get(index).name
-                                selected()
-                                pageStack.pop()
-                            }
-                        }
+                        page.name = name
+                        selected()
+                        pageStack.pop()
                     }
+                }
+
             }
         }
     }

@@ -17,40 +17,43 @@ public:
 
         QStringList parts = id.split("?");
 
-        if (stack.contains(parts.at(0)))
-            return stack.value(parts.at(0));
+        if (parts.count() != 3)
+        {
+            qWarning() << "Invalid image requested";
+            return QImage();
+        }
+
+        if (previewCache.contains(parts.at(0)))
+            return previewCache.value(parts.at(0));
 
         int reqWidth = parts.at(1).toInt();
         int reqHeight = parts.at(2).toInt();
 
         QString filename = "/" + QUrl(parts.at(0)).toString(QUrl::RemoveScheme);
-        QImage img;
-        QSize originalSize;
+        QImage originalImg;
         QImageReader ir(filename);
 
         if (!ir.canRead())
-            return img;
-
-        originalSize = ir.size();
+            return QImage();
 
         if (size)
-            *size = originalSize;
+            *size = ir.size();
 
-        img = ir.read();
+        originalImg = ir.read();
 
-        QImage scaled = img.scaledToWidth(reqWidth);
+        QImage scaled = originalImg.scaledToWidth(reqWidth);
 
         QRect rect(0, (scaled.height()-reqHeight)/2, reqWidth, reqHeight);
 
         QImage cropped = scaled.copy(rect);
 
-        stack.insert(parts.at(0), cropped);
+        previewCache.insert(parts.at(0), cropped);
 
         return cropped;
     }
 
 private:
-    QMap<QString, QImage> stack;
+    QMap<QString, QImage> previewCache;
 };
 
 #endif // IMAGEPROVIDER_H
