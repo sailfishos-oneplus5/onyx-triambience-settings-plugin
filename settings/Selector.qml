@@ -7,7 +7,7 @@ Page
 
     property var ambiences
     property var name
-    property string pageTitle : "Select"
+    property string pageTitle : ""
     signal selected
 
     SilicaFlickable

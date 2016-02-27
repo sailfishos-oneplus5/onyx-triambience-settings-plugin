@@ -1,10 +1,10 @@
 {
-    "translation_catalog": "",
+    "translation_catalog": "onyx-triambience-settings",
     "entries": [
     {
         "path": "system_settings/look_and_feel/onyx-triambience-settings",
         "title": "Tristate ambience selector",
-        "translation_id": "onyx-triambience-settings",
+        "translation_id": "onyx-tristate-settings-title",
         "type": "page",
         "icon": "image://theme/icon-m-ambience",
         "order": 400,

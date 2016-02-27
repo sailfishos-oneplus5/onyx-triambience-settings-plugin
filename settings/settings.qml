@@ -53,7 +53,9 @@ Page
 
             PageHeader
             {
-                title: "Tristate ambience selector"
+                //: page header
+                //% "Tristate ambience selector"
+                title: qsTrId("onyx-tristate-settings-title")
             }
 
             AmbienceImage
@@ -65,7 +67,8 @@ Page
                 {
                     var sel = pageStack.push(Qt.resolvedUrl("Selector.qml"), { ambiences: ambiences,
                                                                                name: ambience_top.value,
-                                                                               pageTitle: "Top"})
+                                                                               //% "Top"
+                                                                               pageTitle: qsTrId("onyx-top-position")})
                     sel.selected.connect(function()
                     {
                         ambience_top.value = sel.name
@@ -73,7 +76,7 @@ Page
                 }
                 Label
                 {
-                    text: "Top"
+                    text: qsTrId("onyx-top-position")
                     font.pixelSize: Theme.fontSizeLarge
                     color: ambiences.getByName(ambience_top.value).highlightColor
                     anchors.left: parent.left
@@ -92,7 +95,8 @@ Page
                 {
                     var sel = pageStack.push(Qt.resolvedUrl("Selector.qml"), { ambiences: ambiences,
                                                                                name: ambience_middle.value,
-                                                                               pageTitle: "Middle"})
+                                                                               //% "Middle"
+                                                                               pageTitle: qsTrId("onyx-middle-position")})
                     sel.selected.connect(function()
                     {
                         ambience_middle.value = sel.name
@@ -100,7 +104,7 @@ Page
                 }
                 Label
                 {
-                    text: "Middle"
+                    text: qsTrId("onyx-middle-position")
                     font.pixelSize: Theme.fontSizeLarge
                     color: ambiences.getByName(ambience_middle.value).highlightColor
                     anchors.left: parent.left
@@ -119,7 +123,8 @@ Page
                 {
                     var sel = pageStack.push(Qt.resolvedUrl("Selector.qml"), { ambiences: ambiences,
                                                                                name: ambience_bottom.value,
-                                                                               pageTitle: "Bottom"})
+                                                                               //% "Bottom"
+                                                                               pageTitle: qsTrId("onyx-bottom-position")})
                     sel.selected.connect(function()
                     {
                         ambience_bottom.value = sel.name
@@ -127,7 +132,7 @@ Page
                 }
                 Label
                 {
-                    text: "Bottom"
+                    text: qsTrId("onyx-bottom-position")
                     font.pixelSize: Theme.fontSizeLarge
                     color: ambiences.getByName(ambience_bottom.value).highlightColor
                     anchors.left: parent.left

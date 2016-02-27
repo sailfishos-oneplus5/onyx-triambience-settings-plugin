@@ -22,6 +22,7 @@ BuildRequires:  pkgconfig(Qt5Qml)
 BuildRequires:  pkgconfig(Qt5Quick)
 BuildRequires:  pkgconfig(Qt5DBus)
 BuildRequires:  mce-headers
+BuildRequires:  qt5-qttools-linguist
 
 %description
 %{summary}.
@@ -50,3 +51,4 @@ rm -rf %{buildroot}
 %{_libdir}/qt5/qml/com/kimmoli/onyxtriambiencesettings/
 /usr/share/jolla-settings/entries/
 /usr/share/jolla-settings/pages/onyx-triambience-settings/
+/usr/share/translations/
