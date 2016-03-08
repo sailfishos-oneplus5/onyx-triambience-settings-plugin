@@ -11,8 +11,9 @@ Page
     {
         id: ambiences
 
-        function getByName(name)
+        function getByName(nameToSearch)
         {
+            var name = nameToSearch.split(";")[0]
             for (var i=0 ; i < ambiences.count ; i++)
             {
                 var n = ambiences.get(i).name
@@ -31,6 +32,7 @@ Page
             for (var i=0 ; i < a.length ; i++)
             {
                 ambiences.append({ name: a[i]["name"],
+                                   filepath: a[i]["filepath"],
                                    displayName: a[i]["displayName"],
                                    wallpaper: a[i]["wallpaper"],
                                    highlightColor: a[i]["highlightColor"]})
@@ -76,7 +78,7 @@ Page
                                                                                pageTitle: qsTrId("onyx-top-position")})
                     sel.selected.connect(function()
                     {
-                        ambience_top.value = sel.name
+                        ambience_top.value = sel.name + ";" + ambiences.getByName(sel.name).filepath
                     })
                 }
             }
@@ -99,7 +101,7 @@ Page
                                                                                pageTitle: qsTrId("onyx-middle-position")})
                     sel.selected.connect(function()
                     {
-                        ambience_middle.value = sel.name
+                        ambience_middle.value = sel.name + ";" + ambiences.getByName(sel.name).filepath
                     })
                 }
             }
@@ -122,7 +124,7 @@ Page
                                                                                pageTitle: qsTrId("onyx-bottom-position")})
                     sel.selected.connect(function()
                     {
-                        ambience_bottom.value = sel.name
+                        ambience_bottom.value = sel.name + ";" + ambiences.getByName(sel.name).filepath
                     })
                 }
             }
