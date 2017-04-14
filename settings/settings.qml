@@ -74,7 +74,7 @@ Page
                 onClicked:
                 {
                     var sel = pageStack.push(Qt.resolvedUrl("Selector.qml"), { ambiences: ambiences,
-                                                                               name: ambience_top.value,
+                                                                               name: ambience_top.value.split(";")[0],
                                                                                pageTitle: qsTrId("onyx-top-position")})
                     sel.selected.connect(function()
                     {
@@ -97,7 +97,7 @@ Page
                 onClicked:
                 {
                     var sel = pageStack.push(Qt.resolvedUrl("Selector.qml"), { ambiences: ambiences,
-                                                                               name: ambience_middle.value,
+                                                                               name: ambience_middle.value.split(";")[0],
                                                                                pageTitle: qsTrId("onyx-middle-position")})
                     sel.selected.connect(function()
                     {
@@ -120,7 +120,7 @@ Page
                 onClicked:
                 {
                     var sel = pageStack.push(Qt.resolvedUrl("Selector.qml"), { ambiences: ambiences,
-                                                                               name: ambience_bottom.value,
+                                                                               name: ambience_bottom.value.split(";")[0],
                                                                                pageTitle: qsTrId("onyx-bottom-position")})
                     sel.selected.connect(function()
                     {
@@ -129,26 +129,26 @@ Page
                 }
             }
         }
-    }    
+    }
 
     ConfigurationValue
     {
         id: ambience_top
         key: "/apps/onyxtristate/top"
-        defaultValue: "silent"
+        defaultValue: "silent.ambience"
     }
     ConfigurationValue
     {
         id: ambience_middle
         key: "/apps/onyxtristate/middle"
-        defaultValue: "sailing"
+        defaultValue: "sailing.ambience"
     }
     ConfigurationValue
     {
         id: ambience_bottom
         key: "/apps/onyxtristate/bottom"
-        defaultValue: "origami"
+        defaultValue: "origami.ambience"
     }
-   
+
 }
 

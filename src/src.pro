@@ -1,7 +1,7 @@
 TEMPLATE = lib
 TARGET = onyxtriambiencesettings-qt5
 CONFIG += qt hide_symbols 
-QT += dbus qml quick
+QT += dbus qml quick sql
 QT -= gui
 
 SOURCES += \

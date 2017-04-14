@@ -1,15 +1,12 @@
 #include "settingsui.h"
-#include <QDir>
 #include <QVariantMap>
 #include <QVariantList>
-#include <QThread>
-#include <QSettings>
 #include <QDebug>
-#include <QtDBus/QtDBus>
-#include <QtAlgorithms>
-#include <QFileInfo>
-#include <linux/input.h>
-
+#include <QSqlDatabase>
+#include <QSqlError>
+#include <QSqlQuery>
+#include <QSqlRecord>
+#include <QMutableListIterator>
 
 SettingsUi::SettingsUi(QObject *parent) :
     QObject(parent)
@@ -20,69 +17,90 @@ QVariantList SettingsUi::getAmbiences()
 {
     QVariantList tmp;
     QVariantMap map;
+    QSqlDatabase* db;
+    QSqlQuery query;
 
-    ambienceFiles.clear();
+    db = new QSqlDatabase(QSqlDatabase::addDatabase("QSQLITE"));
+    db->setDatabaseName("/home/nemo/.local/share/system/privileged/Ambienced/ambienced.sqlite");
 
-    QDir selectedDir("/usr/share/ambience/");
-    selectedDir.setFilter(QDir::Files | QDir::Dirs | QDir::NoDot | QDir::NoDotDot);
-    QStringList filter;
-    filter.append("*.ambience");
-    selectedDir.setNameFilters(filter);
-    findFilesRecursively(selectedDir);
-
-    foreach (QString ambienceFilename, ambienceFiles)
+    if (!db->open())
     {
-        QFile amb;
-        amb.setFileName(ambienceFilename);
-
-        if (!amb.exists() || !amb.open(QFile::ReadOnly | QFile::Text))
-        {
-            continue;
-        }
-
-        QTextStream in(&amb);
-        QString ambString = in.readAll();
-
-        if (ambString.isEmpty())
-        {
-            amb.close();
-            continue;
-        }
-
-        QJsonDocument ambJson = QJsonDocument::fromJson(ambString.toUtf8());
-        QJsonObject ambObject = ambJson.object();
-
-        QFileInfo fi(amb);
-
-        QString displayName = ambObject["displayName"].toString();
-
-        QTranslator translator;
-        if (translator.load( QLocale(), ambObject["translationCatalog"].toString(), "-", "/usr/share/translations" ) )
-        {
-            displayName = translator.translate("", ambObject["displayName"].toString().toLocal8Bit().constData());
-        }
-
-        map.clear();
-        map.insert("name", fi.baseName());
-        map.insert("filepath", fi.absoluteFilePath());
-        map.insert("displayName", displayName);
-        map.insert("wallpaper", fi.absolutePath() + "/images/" + ambObject["wallpaper"].toString());
-        map.insert("highlightColor", ambObject["highlightColor"].toString());
-        tmp.append(map);
-
-        amb.close();
+        qDebug() << "Error opening ambienced db:" << db->lastError().text();
+        return tmp;
     }
 
+    /* Collect installed ambiences
+     *
+     * From this table we get:
+     * - fileId
+     * - wallpaper - abs path to the wallpaper image
+     * - highlightcolor
+     */
+
+    query = QSqlQuery("SELECT * FROM ambience", *db);
+
+    if (query.exec())
+    {
+        while (query.next())
+        {
+            map.clear();
+            map.insert("fileId", query.record().value("fileId").toInt());
+            map.insert("wallpaper", query.record().value("homeWallpaper").toString());
+            map.insert("highlightColor", query.record().value("highlightColor").toString());
+            tmp.append(map);
+        }
+    }
+
+    /* Add file info
+     *
+     * directoryId
+     * displayName
+     * filename
+     */
+
+    int i;
+
+    for (i=0 ; i < tmp.size() ; i++)
+    {
+        QVariantMap eMap = tmp.at(i).value<QVariantMap>();
+        tmp.removeAt(i);
+
+        query = QSqlQuery(QString("SELECT * FROM file WHERE id=%1").arg(eMap.value("fileId").toInt()), *db);
+        if (query.exec())
+        {
+            while (query.next())
+            {
+                eMap.insert("dirId", query.record().value("directoryId").toInt());
+                eMap.insert("displayName", query.record().value("displayName").toString());
+                eMap.insert("name", query.record().value("fileName").toString());
+            }
+        }
+        tmp.insert(i, eMap);
+    }
+
+    /* Get file path from directory table */
+
+    for (i=0 ; i<tmp.size(); i++)
+    {
+        QVariantMap eMap = tmp.at(i).value<QVariantMap>();
+        tmp.removeAt(i);
+
+        query = QSqlQuery(QString("SELECT * FROM directory WHERE id=%1").arg(eMap.value("dirId").toInt()), *db);
+        if (query.exec())
+        {
+            while (query.next())
+            {
+                eMap.insert("filepath", query.record().value("path").toString() + "/" + eMap.value("name").toString());
+            }
+        }
+        tmp.insert(i, eMap);
+    }
+
+    db->close();
+    
+    qDebug() << "Found" << tmp.size() << "ambiences.";
+    
     return tmp;
-}
-
-void SettingsUi::findFilesRecursively(QDir rootDir)
-{
-    QDirIterator it(rootDir, QDirIterator::Subdirectories);
-    while(it.hasNext())
-    {
-        ambienceFiles.append(it.next());
-    }
 }
 
 SettingsUi::~SettingsUi()
