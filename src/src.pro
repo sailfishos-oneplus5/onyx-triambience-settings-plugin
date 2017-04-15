@@ -8,8 +8,7 @@ SOURCES += \
     settingsui.cpp
 
 HEADERS += \
-    settingsui.h \
-    ImageProvider.h
+    settingsui.h
 
 target.path = $$[QT_INSTALL_LIBS]
 

@@ -4,7 +4,6 @@
 #include <QQmlExtensionPlugin>
 #include <QTranslator>
 #include "settingsui.h"
-#include "ImageProvider.h"
 
 class Translator : public QTranslator
 {
@@ -46,8 +45,6 @@ public:
     void initializeEngine(QQmlEngine *engine, const char *uri)
     {
         Q_ASSERT(uri == QLatin1String("com.kimmoli.onyxtriambiencesettings"));
-
-        engine->addImageProvider("wallpapers", new ImageProvider);
 
         Translator *engineeringEnglish = new Translator(engine);
         if (!engineeringEnglish->load("onyx-triambience-settings_eng_en", "/usr/share/translations"))

@@ -68,7 +68,7 @@ Page
 
             AmbienceImage
             {
-                source: "image://wallpapers" + ambiences.getByName(ambience_top.value).wallpaper + "?" + width + "?" + height
+                source: ambiences.getByName(ambience_top.value).wallpaper
                 ambienceName: ambiences.getByName(ambience_top.value).displayName
                 ambienceColor: ambiences.getByName(ambience_top.value).highlightColor
                 onClicked:
@@ -91,7 +91,7 @@ Page
 
             AmbienceImage
             {
-                source: "image://wallpapers" + ambiences.getByName(ambience_middle.value).wallpaper + "?" + width + "?" + height
+                source: ambiences.getByName(ambience_middle.value).wallpaper
                 ambienceName: ambiences.getByName(ambience_middle.value).displayName
                 ambienceColor: ambiences.getByName(ambience_middle.value).highlightColor
                 onClicked:
@@ -114,7 +114,7 @@ Page
 
             AmbienceImage
             {
-                source: "image://wallpapers" + ambiences.getByName(ambience_bottom.value).wallpaper + "?" + width + "?" + height
+                source: ambiences.getByName(ambience_bottom.value).wallpaper
                 ambienceName: ambiences.getByName(ambience_bottom.value).displayName
                 ambienceColor: ambiences.getByName(ambience_bottom.value).highlightColor
                 onClicked:
