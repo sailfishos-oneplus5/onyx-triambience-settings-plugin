@@ -4,7 +4,6 @@
 #include <QVariantList>
 #include <QTimer>
 #include <QMap>
-#include <QDir>
 
 class Q_DECL_EXPORT SettingsUi : public QObject
 {
@@ -15,10 +14,6 @@ public:
     virtual ~SettingsUi();
 
     Q_INVOKABLE QVariantList getAmbiences();
-
-private:
-    void findFilesRecursively(QDir rootDir);
-    QStringList ambienceFiles;
 };
 
 
