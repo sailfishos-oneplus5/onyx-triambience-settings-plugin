@@ -34,7 +34,7 @@ Page
                 model: ambiences
                 delegate: AmbienceImage
                 {
-                    source: "image://wallpapers" + wallpaper + "?" + width + "?" + height
+                    source: wallpaper
                     ambienceName: displayName
                     ambienceColor: highlightColor
                     isSelected: name === page.name
