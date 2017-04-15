@@ -6,7 +6,7 @@
 #include <QSqlError>
 #include <QSqlQuery>
 #include <QSqlRecord>
-#include <QMutableListIterator>
+#include <QStandardPaths>
 
 SettingsUi::SettingsUi(QObject *parent) :
     QObject(parent)
@@ -21,7 +21,7 @@ QVariantList SettingsUi::getAmbiences()
     QSqlQuery query;
 
     db = new QSqlDatabase(QSqlDatabase::addDatabase("QSQLITE"));
-    db->setDatabaseName("/home/nemo/.local/share/system/privileged/Ambienced/ambienced.sqlite");
+    db->setDatabaseName(QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) + "/system/privileged/Ambienced/ambienced.sqlite");
 
     if (!db->open())
     {
