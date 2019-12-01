@@ -4,21 +4,20 @@
 <context>
     <name></name>
     <message id="onyx-tristate-settings-title">
-        <source>Tristate ambience selector</source>
-        <extracomment>page header</extracomment>
-        <translation>Tristate ambience selector</translation>
+        <source>Ambience slider</source>
+        <translation>Ambience slider</translation>
     </message>
     <message id="onyx-top-position">
-        <source>Top</source>
-        <translation>Top</translation>
+        <source>Top position</source>
+        <translation>Top position</translation>
     </message>
     <message id="onyx-middle-position">
-        <source>Middle</source>
-        <translation>Middle</translation>
+        <source>Middle position</source>
+        <translation>Middle position</translation>
     </message>
     <message id="onyx-bottom-position">
-        <source>Bottom</source>
-        <translation>Bottom</translation>
+        <source>Bottom position</source>
+        <translation>Bottom position</translation>
     </message>
 </context>
 </TS>

@@ -1,22 +1,23 @@
-<?xml version="1.0" ?><!DOCTYPE TS><TS language="pl" version="2.1">
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE TS>
+<TS version="2.1" language="pl">
 <context>
-    <name/>
+    <name></name>
     <message id="onyx-tristate-settings-title">
-        <source>Tristate ambience selector</source>
-        <extracomment>page header</extracomment>
-        <translation>Wybieranie atmosfery</translation>
+        <source>Ambience slider</source>
+        <translation>Suwak atmosfery</translation>
     </message>
     <message id="onyx-top-position">
-        <source>Top</source>
-        <translation>Góra</translation>
+        <source>Top position</source>
+        <translation>Góra pozycja</translation>
     </message>
     <message id="onyx-middle-position">
-        <source>Middle</source>
-        <translation>Środek</translation>
+        <source>Middle position</source>
+        <translation>Środek pozycja</translation>
     </message>
     <message id="onyx-bottom-position">
-        <source>Bottom</source>
-        <translation>Dół</translation>
+        <source>Bottom position</source>
+        <translation>Dół pozycja</translation>
     </message>
 </context>
 </TS>
