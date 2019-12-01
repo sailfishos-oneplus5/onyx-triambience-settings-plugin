@@ -1,1 +1,4 @@
+*~
 *.qm
+*.pro.user
+.vscode
