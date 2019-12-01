@@ -1,21 +1,22 @@
-#include "settingsui.h"
+#include <QDebug>
 #include <QVariantMap>
 #include <QVariantList>
-#include <QDebug>
+#include <QStandardPaths>
 #include <QSqlDatabase>
-#include <QSqlError>
 #include <QSqlQuery>
 #include <QSqlRecord>
-#include <QStandardPaths>
+#include <QSqlError>
+#include "settingsui.h"
 
-SettingsUi::SettingsUi(QObject *parent) :
-    QObject(parent)
+
+SettingsUi::SettingsUi(QObject *parent) : QObject(parent)
 {
+    /* Leaving this here for future needs */
 }
 
 QVariantList SettingsUi::getAmbiences()
 {
-    QVariantList tmp;
+    QVariantList ambiences;
     QVariantMap map;
     QSqlDatabase* db;
     QSqlQuery query;
@@ -26,7 +27,7 @@ QVariantList SettingsUi::getAmbiences()
     if (!db->open())
     {
         qDebug() << "Error opening ambienced db:" << db->lastError().text();
-        return tmp;
+        return ambiences;
     }
 
     /* Collect installed ambiences
@@ -47,7 +48,7 @@ QVariantList SettingsUi::getAmbiences()
             map.insert("fileId", query.record().value("fileId").toInt());
             map.insert("wallpaper", query.record().value("homeWallpaper").toString());
             map.insert("highlightColor", query.record().value("highlightColor").toString());
-            tmp.append(map);
+            ambiences.append(map);
         }
     }
 
@@ -60,10 +61,10 @@ QVariantList SettingsUi::getAmbiences()
 
     int i;
 
-    for (i=0 ; i < tmp.size() ; i++)
+    for (i = 0; i < ambiences.size(); i++)
     {
-        QVariantMap eMap = tmp.at(i).value<QVariantMap>();
-        tmp.removeAt(i);
+        QVariantMap eMap = ambiences.at(i).value<QVariantMap>();
+        ambiences.removeAt(i);
 
         query = QSqlQuery(QString("SELECT * FROM file WHERE id=%1").arg(eMap.value("fileId").toInt()), *db);
         if (query.exec())
@@ -75,34 +76,30 @@ QVariantList SettingsUi::getAmbiences()
                 eMap.insert("name", query.record().value("fileName").toString());
             }
         }
-        tmp.insert(i, eMap);
+        ambiences.insert(i, eMap);
     }
 
     /* Get file path from directory table */
 
-    for (i=0 ; i<tmp.size(); i++)
+    for (i = 0; i < ambiences.size(); i++)
     {
-        QVariantMap eMap = tmp.at(i).value<QVariantMap>();
-        tmp.removeAt(i);
+        QVariantMap eMap = ambiences.at(i).value<QVariantMap>();
+        ambiences.removeAt(i);
 
         query = QSqlQuery(QString("SELECT * FROM directory WHERE id=%1").arg(eMap.value("dirId").toInt()), *db);
         if (query.exec())
         {
             while (query.next())
-            {
                 eMap.insert("filepath", query.record().value("path").toString() + "/" + eMap.value("name").toString());
-            }
         }
-        tmp.insert(i, eMap);
+        ambiences.insert(i, eMap);
     }
 
     db->close();
-    
-    qDebug() << "Found" << tmp.size() << "ambiences.";
-    
-    return tmp;
+
+    qDebug() << "Found" << ambiences.size() << "ambiences.";
+
+    return ambiences;
 }
 
-SettingsUi::~SettingsUi()
-{
-}
+SettingsUi::~SettingsUi() {  }

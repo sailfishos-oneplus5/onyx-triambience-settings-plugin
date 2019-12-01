@@ -5,11 +5,11 @@
 #include <QTranslator>
 #include "settingsui.h"
 
+
 class Translator : public QTranslator
 {
 public:
-    Translator(QObject *parent)
-        : QTranslator(parent)
+    Translator(QObject *parent) : QTranslator(parent)
     {
         qApp->installTranslator(this);
     }
@@ -23,18 +23,12 @@ public:
 class Q_DECL_EXPORT OnyxTriambienceSettingsPlugin : public QQmlExtensionPlugin
 {
     Q_OBJECT
+
 #if QT_VERSION >= QT_VERSION_CHECK(5, 0, 0)
     Q_PLUGIN_METADATA(IID "com.kimmoli.onyxtriambiencesettings")
 #endif
+
 public:
-    OnyxTriambienceSettingsPlugin()
-    {
-    }
-
-    virtual ~OnyxTriambienceSettingsPlugin()
-    {
-    }
-
     void registerTypes(const char *uri)
     {
         Q_ASSERT(uri == QLatin1String("com.kimmoli.onyxtriambiencesettings"));
@@ -56,6 +50,10 @@ public:
 
         QQmlExtensionPlugin::initializeEngine(engine, uri);
     }
+
+    OnyxTriambienceSettingsPlugin() {  }
+
+    virtual ~OnyxTriambienceSettingsPlugin() {  }
 };
 
 #include "plugin.moc"

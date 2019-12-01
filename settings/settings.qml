@@ -1,6 +1,6 @@
-import QtQuick 2.0
+import QtQuick 2.2
 import Sailfish.Silica 1.0
-import org.nemomobile.configuration 1.0
+import Nemo.Configuration 1.0
 import com.kimmoli.onyxtriambiencesettings 1.0
 
 Page
@@ -14,11 +14,10 @@ Page
         function getByName(nameToSearch)
         {
             var name = nameToSearch.split(";")[0]
-            for (var i=0 ; i < ambiences.count ; i++)
+            for (var i = 0; i < ambiences.count; i++)
             {
                 var n = ambiences.get(i).name
-                if (name === n)
-                    return ambiences.get(i)
+                if (name === n) return ambiences.get(i)
             }
             return 0;
         }
@@ -29,43 +28,45 @@ Page
         Component.onCompleted:
         {
             var a = getAmbiences()
-            for (var i=0 ; i < a.length ; i++)
+            for (var i = 0; i < a.length; i++)
             {
-                ambiences.append({ name: a[i]["name"],
-                                   filepath: a[i]["filepath"],
-                                   displayName: a[i]["displayName"],
-                                   wallpaper: a[i]["wallpaper"],
-                                   highlightColor: a[i]["highlightColor"]})
+                ambiences.append({
+                    name:           a[i]["name"],
+                    filepath:       a[i]["filepath"],
+                    displayName:    a[i]["displayName"],
+                    wallpaper:      a[i]["wallpaper"],
+                    highlightColor: a[i]["highlightColor"]
+                })
             }
         }
     }
 
+    // Flickable wrapper
     SilicaFlickable
     {
         id: flick
         anchors.fill: parent
+        contentHeight: col.height
 
-        contentHeight: column.height
-
+        // Page content
         Column
         {
-            id: column
-
+            id: col
             width: page.width
 
+            // Ambience slider
             PageHeader
             {
-                //: page header
-                //% "Tristate ambience selector"
+                //% "Ambience slider"
                 title: qsTrId("onyx-tristate-settings-title")
             }
 
+            // Top position
             SectionHeader
             {
-                //% "Top"
+                //% "Top position"
                 text: qsTrId("onyx-top-position")
             }
-
             AmbienceImage
             {
                 source: ambiences.getByName(ambience_top.value).wallpaper
@@ -83,12 +84,12 @@ Page
                 }
             }
 
+            // Middle position
             SectionHeader
             {
-                //% "Middle"
+                //% "Middle position"
                 text: qsTrId("onyx-middle-position")
             }
-
             AmbienceImage
             {
                 source: ambiences.getByName(ambience_middle.value).wallpaper
@@ -106,12 +107,12 @@ Page
                 }
             }
 
+            // Bottom position
             SectionHeader
             {
-                //% "Bottom"
+                //% "Bottom position"
                 text: qsTrId("onyx-bottom-position")
             }
-
             AmbienceImage
             {
                 source: ambiences.getByName(ambience_bottom.value).wallpaper
@@ -131,6 +132,7 @@ Page
         }
     }
 
+    // Wrappers for triambience's dconf values
     ConfigurationValue
     {
         id: ambience_top
@@ -149,6 +151,4 @@ Page
         key: "/apps/onyxtristate/bottom"
         defaultValue: "origami.ambience"
     }
-
 }
-

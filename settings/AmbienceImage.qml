@@ -1,11 +1,10 @@
-import QtQuick 2.0
+import QtQuick 2.2
 import Sailfish.Silica 1.0
 import org.nemomobile.thumbnailer 1.0
 
 BackgroundItem
 {
-
-    width: flick.width ? Math.min(flick.width, screen.sizeCategory > Screen.Medium ? Screen.width*0.7 : Screen.width) : Screen.width
+    width: flick.width ? Math.min(flick.width, screen.sizeCategory > Screen.Medium ? Screen.width * 0.7 : Screen.width) : Screen.width
     height: Theme.itemSizeHuge
 
     property alias source: img.source
@@ -27,7 +26,7 @@ BackgroundItem
         gradient: Gradient
         {
             GradientStop { position: 0.0; color: "transparent" }
-            GradientStop { position: 1.0; color: Qt.rgba(0.0 ,0.0, 0.0, 0.5) }
+            GradientStop { position: 1.0; color: Qt.rgba(0.0, 0.0, 0.0, 0.5) }
         }
     }
 
@@ -54,7 +53,7 @@ BackgroundItem
         opacity: (isSelected) ? 1.0 : 0.0
         color: Theme.primaryColor
         anchors.left: parent.left
-        anchors.leftMargin: -width/2
+        anchors.leftMargin: -width / 2
         anchors.verticalCenter: namelabel.verticalCenter
         dimmed: false
         falloffRadius: defaultFalloffRadius

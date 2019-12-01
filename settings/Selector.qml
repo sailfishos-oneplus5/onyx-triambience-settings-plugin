@@ -1,4 +1,4 @@
-import QtQuick 2.0
+import QtQuick 2.2
 import Sailfish.Silica 1.0
 
 Page
@@ -10,18 +10,18 @@ Page
     property string pageTitle : ""
     signal selected
 
+    // Flickable wrapper
     SilicaFlickable
     {
         id: flick
         anchors.fill: parent
+        contentHeight: col.height
         clip: true
 
-        contentHeight: column.height
-
+        // Page content
         Column
         {
-            id: column
-
+            id: col
             width: page.width
 
             PageHeader
@@ -45,7 +45,6 @@ Page
                         pageStack.pop()
                     }
                 }
-
             }
         }
     }

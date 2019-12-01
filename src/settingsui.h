@@ -1,9 +1,10 @@
 #ifndef SETTINGSUI_H
 #define SETTINGSUI_H
+
 #include <QObject>
 #include <QVariantList>
-#include <QTimer>
 #include <QMap>
+
 
 class Q_DECL_EXPORT SettingsUi : public QObject
 {
@@ -15,6 +16,5 @@ public:
 
     Q_INVOKABLE QVariantList getAmbiences();
 };
-
 
 #endif // SETTINGSUI_H

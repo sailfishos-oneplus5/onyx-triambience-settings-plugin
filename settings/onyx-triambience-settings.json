@@ -1,9 +1,8 @@
 {
     "translation_catalog": "onyx-triambience-settings",
-    "entries": [
-    {
+    "entries": [{
         "path": "system_settings/look_and_feel/onyx-triambience-settings",
-        "title": "Tristate ambience selector",
+        "title": "Ambience slider",
         "translation_id": "onyx-tristate-settings-title",
         "type": "page",
         "icon": "image://theme/icon-m-ambience",
@@ -11,6 +10,5 @@
         "params": {
             "source": "/usr/share/jolla-settings/pages/onyx-triambience-settings/settings.qml"
          }
-    }
-    ]
+    }]
 }
