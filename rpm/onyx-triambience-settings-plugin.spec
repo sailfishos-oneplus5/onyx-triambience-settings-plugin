@@ -13,7 +13,7 @@ Name:       onyx-triambience-settings-plugin
 %{?qtc_builddir:%define _builddir %qtc_builddir}
 
 Summary:    Onyx triambience settings plugin
-Version:    0.0.1
+Version:    1.0.0
 Release:    1
 Group:      System/System Control
 License:    LICENSE
