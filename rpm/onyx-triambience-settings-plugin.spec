@@ -1,5 +1,9 @@
-# 
-# 
+#
+# triambience-settings-plugin RPM spec
+#
+# (C) kimmoli 2016
+# (C) Jami Kettunen 2019
+#
 
 Name:       onyx-triambience-settings-plugin
 
@@ -11,22 +15,23 @@ Name:       onyx-triambience-settings-plugin
 Summary:    Onyx triambience settings plugin
 Version:    0.0.1
 Release:    1
-Group:      System/Libraries
+Group:      System/System Control
 License:    LICENSE
-URL:        https://github.com/
+URL:        https://github.com/sailfishos-oneplus5/onyx-triambience-settings-plugin
 Source0:    %{name}-%{version}.tar.bz2
-Requires(post): /sbin/ldconfig
-Requires(postun): /sbin/ldconfig
-BuildRequires:  pkgconfig(Qt5Core)
-BuildRequires:  pkgconfig(Qt5Qml)
-BuildRequires:  pkgconfig(Qt5Quick)
-BuildRequires:  pkgconfig(Qt5DBus)
-BuildRequires:  pkgconfig(Qt5Sql)
-BuildRequires:  mce-headers
-BuildRequires:  qt5-qttools-linguist
+
+Requires(post):    /sbin/ldconfig
+Requires(postun):  /sbin/ldconfig
+BuildRequires:     pkgconfig(Qt5Core)
+BuildRequires:     pkgconfig(Qt5Qml)
+BuildRequires:     pkgconfig(Qt5Quick)
+BuildRequires:     pkgconfig(Qt5DBus)
+BuildRequires:     pkgconfig(Qt5Sql)
+BuildRequires:     qt5-qttools-linguist
+BuildRequires:     mce-headers
 
 %description
-%{summary}.
+Control the three chosen ambiences for triambience system daemon straight from your system settings.
 
 %prep
 %setup -q -n %{name}-%{version}
